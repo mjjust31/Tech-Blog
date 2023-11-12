@@ -1,0 +1,31 @@
+body {
+  background-color: rgb(61, 61, 94);
+  font-size: 25px;
+}
+
+.custom-title {
+  text-align: center;
+  padding: 20px;
+  margin: 10px 50px 0px 0px;
+  color: rgb(52, 6, 35)
+}
+
+.custom-navbar {
+  border-bottom: 10px rgb(144, 93, 148) solid;
+  background-color: rgb(228, 192, 214);
+}
+
+.custom-form {
+  max-width: 50%;
+  margin: 25px auto;
+  color: white;
+  border: 5px white solid; 
+  padding: 25px;
+}
+.sign-up {
+  margin: 25px auto 10px; 
+  display: flex;
+  padding: 10px;
+  border-radius: 25px;
+
+}
