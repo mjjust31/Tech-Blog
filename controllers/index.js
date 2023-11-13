@@ -25,6 +25,8 @@ router.post("/user/sign", async (req, res) => {
       username: req.body.username,
       password: req.body.password,
     });
+    console.log("User created");
+    res.redirect("/post");
   } catch (err) {
     res.status(400).json(err);
   }
@@ -33,6 +35,14 @@ router.post("/user/sign", async (req, res) => {
 router.get("/user/login", async (req, res) => {
   try {
     res.render("login");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/post", async (req, res) => {
+  try {
+    res.render("newPost");
   } catch (err) {
     res.status(500).json(err);
   }

@@ -1,5 +1,7 @@
-const createNewUser = async function (event) {
-  event.preventDefault;
+const form = document.querySelector("#signUp");
+
+form.addEventListener("submit", async function (event) {
+  event.preventDefault();
   const usernameEl = document.getElementById("newUsername");
   const passwordEl = document.getElementById("newPassword");
 
@@ -11,12 +13,13 @@ const createNewUser = async function (event) {
     }),
     headers: { "Content-Type": "application/json" },
   });
+
   console.log("response", response);
+
   if (response.ok) {
     console.log("You hit this route!");
+    document.location.replace("/post");
   } else {
-    alert("Your login failed. Have you created an account?");
+    alert("Failed to create an account. Please check password requirements");
   }
-};
-
-document.querySelector("#signUp").addEventListener("submit", createNewUser);
+});
