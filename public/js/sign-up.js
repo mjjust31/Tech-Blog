@@ -3,12 +3,7 @@ const createNewUser = async function (event) {
   const usernameEl = document.getElementById("newUsername");
   const passwordEl = document.getElementById("newPassword");
 
-
-
-  
-
-
-  const response = await fetch("/", {
+  const response = await fetch("/user/sign", {
     method: "POST",
     body: JSON.stringify({
       username: usernameEl.value.trim(),
@@ -18,7 +13,7 @@ const createNewUser = async function (event) {
   });
   console.log("response", response);
   if (response.ok) {
-   console.log("You hit this route!")
+    console.log("You hit this route!");
   } else {
     alert("Your login failed. Have you created an account?");
   }
