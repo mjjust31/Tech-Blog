@@ -17,7 +17,6 @@ form.addEventListener("submit", async function (event) {
   console.log("response", response);
 
   if (response.ok) {
-    console.log("You hit this route!");
     document.location.replace("/post");
   } else {
     alert("Failed to create an account. Please check password requirements");
