@@ -43,6 +43,34 @@ router.get("/user/login", async (req, res) => {
   }
 });
 
+router.post("/user/login", async (req, res) => {
+  console.log(req.body)
+  try {
+    const returnUser = await User.findOne({
+      where: { username: req.body.username },
+    });
+    if (!returnUser) {
+      res.status(400).json({ message: "Wrong login inforomation" });
+      return;
+    }
+    const isPasswordValid = await returnUser.validatePassword(
+      req.body.password
+    );
+    console.log(isPasswordValid);
+    if (!isPasswordValid) {
+      res.status(400).json({ message: "You hit the password route" });
+      return;
+    }
+    console.log(returnUser);
+    // res.redirect("/dashboard");
+  } catch (err) {
+    res.status(400).json({ message: "This did not work" });
+  }
+});
+
+
+
+
 router.get("/dashboard", async (req, res) => {
   try {
     res.render("user_main");
@@ -58,8 +86,6 @@ router.get("/post", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-
 
 router.post("/post", async (req, res) => {
   console.log(req.body);

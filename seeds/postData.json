@@ -1,12 +1,12 @@
 [
   {
-    "title": "stuff",
-    "content": "stuff",
+    "title": "This is the title of the first post",
+    "content": "This is the content of the first post",
     "userId": "1"
   },
   {
-    "title": "second",
-    "content": "second",
+    "title": "This is the title of the second post",
+    "content": "This is the conetnt of the second post.",
     "userId": "2"
   }
 ]
