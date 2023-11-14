@@ -17,7 +17,7 @@ form.addEventListener("submit", async function (event) {
   console.log("response", response);
 
   if (response.ok) {
-    document.location.replace("/post");
+    document.location.replace("/dashboard");
   } else {
     alert("Failed to create an account. Please check password requirements");
   }

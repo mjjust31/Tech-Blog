@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 
 class Comment extends Model {}
 
-Post.init(
+Comment.init(
   {
     id: {
       type: DataTypes.INTEGER,

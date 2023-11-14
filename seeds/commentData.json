@@ -1,0 +1,13 @@
+[
+  {
+    "content": "This is a comment to a post", 
+    "postId": "1", 
+    "userId": "1"
+  },
+  {
+    "username": "Ernie is commenting on a post", 
+    "postId": "2", 
+    "userId": "2"
+
+  }
+]

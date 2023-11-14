@@ -1,3 +1,27 @@
-<body>
-	<a href="#" class="newPost button">+ New Post</a>
-</body>
+<form id="newPostForm" class="custom-new-post container">
+  <div class="input-group mt-3 mb-3">
+    <span class="input-group-text">Title</span>
+    <input
+      id="newTitle"
+      type="text"
+      class="form-control"
+      placeholder="title"
+      aria-label="text-title"
+      aria-describedby="basic-addon1"
+    />
+  </div>
+  <div class="input-group">
+    <span class="input-group-text">Content</span>
+    <textarea
+      id="newPostContent"
+      class="form-control"
+      aria-label="textarea"
+      placeholder="add your content here"
+    ></textarea>
+  </div>
+
+  <div class="postButton">
+    <button class="text-center">Add Post</button>
+  </div>
+</form>
+<script src="/js/newPost.js"></script>
