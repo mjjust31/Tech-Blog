@@ -7,12 +7,20 @@ const session = require("express-session");
 const app = express();
 const PORT = process.env.PORT || 3001;
 const helpers = require("./utils/helpers");
+const sequelize = require("./config/connection");
+// const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 // Set up sessions
 const sess = {
   secret: "Super secret secret",
+  // cookie: {
+  //   maxAge: 60 * 60 * 1000, //one hour
+  // },
   resave: false,
   saveUninitialized: true,
+  // store: new SequelizeStore({
+  //   db: sequelize,
+  // }),
 };
 
 app.use(session(sess));
@@ -32,4 +40,5 @@ app.use(require("./controllers/index"));
 // Starts the server to begin listening
 app.listen(PORT, () => {
   console.log("Server listening on: http://localhost:" + PORT);
+  // sequelize.sync({ force: false });
 });

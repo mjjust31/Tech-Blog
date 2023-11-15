@@ -5,7 +5,10 @@ const bcrypt = require("bcrypt");
 
 router.get("/", async (req, res) => {
   try {
-    res.render("dashboard-posts");
+    const postData = await Post.findAll();
+    const post = postData.map((post) => post.get({ plain: true }));
+
+    res.render("dashboard-posts", { post });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -44,11 +47,16 @@ router.get("/user/login", async (req, res) => {
 });
 
 router.post("/user/login", async (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
   try {
     const returnUser = await User.findOne({
       where: { username: req.body.username },
     });
+    req.session.save(() => {
+      req.session.loggedIn = true;
+      res.status(200).json(newUser);
+    });
+
     if (!returnUser) {
       res.status(400).json({ message: "Wrong login inforomation" });
       return;
@@ -67,9 +75,6 @@ router.post("/user/login", async (req, res) => {
     res.status(400).json({ message: "This did not work" });
   }
 });
-
-
-
 
 router.get("/dashboard", async (req, res) => {
   try {

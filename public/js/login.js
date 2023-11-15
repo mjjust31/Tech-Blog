@@ -1,5 +1,4 @@
 
-
 const formLogin = document.querySelector("#formLogin");
 
 formLogin.addEventListener("submit", async function (event) {
@@ -21,7 +20,7 @@ formLogin.addEventListener("submit", async function (event) {
   console.log("response", response);
 
   if (response.ok) {
-    alert("Hit the good route");
+    document.location.replace("/dashboard");
   } else {
     alert("Bad request");
   }
