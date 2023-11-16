@@ -118,3 +118,14 @@ body {
   margin: 20px;
 }
 
+.custom-homepage-card {
+display: flex;
+align-items: center;
+justify-content: space-around;
+color: rgb(48, 3, 10);
+}
+
+.dashboard-container {
+  margin: 15px auto;
+
+}

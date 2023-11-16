@@ -5,9 +5,7 @@ const bcrypt = require("bcrypt");
 
 router.get("/", async (req, res) => {
   try {
-    const postData = await Post.findAll();
-    // {include: [User], }
-
+    const postData = await Post.findAll({ include: [User] });
     const post = postData.map((post) => post.get({ plain: true }));
 
     res.render("dashboard-posts", { post });
