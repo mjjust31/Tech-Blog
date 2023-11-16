@@ -1,8 +1,8 @@
 {{#each post}}
   <div class="container dashboard-container">
-    <section class="card custom-homepage-card">
+    <a class="card custom-homepage-card" href="/post/:{{id}}"> 
       <h1>{{title}}</h1>
       <p> Posted by: {{User.username}}</p>
-    </section>
+    </a>
   </div>
 {{/each}}

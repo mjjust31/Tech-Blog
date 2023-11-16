@@ -1,7 +1,11 @@
 const router = require("express").Router();
-
 const { Post, Comment, User } = require("../models");
 const bcrypt = require("bcrypt");
+
+const apiRoutes = require('./api/')
+
+router.use('/api', apiRoutes)
+
 
 router.get("/", async (req, res) => {
   try {
@@ -14,71 +18,14 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/user/sign", async (req, res) => {
-  try {
-    res.render("signup");
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-router.post("/user/sign", async (req, res) => {
-  console.log(req.body);
-  try {
-    const newUser = await User.create({
-      username: req.body.username,
-      password: req.body.password,
-    });
-    req.session.save(() => {
-      req.session.loggedIn = true;
-      res.status(200).json(newUser);
-    });
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
-
-router.get("/user/login", async (req, res) => {
-  try {
-    res.render("login");
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-router.post("/user/login", async (req, res) => {
-  console.log(req.body);
+router.get("/dashboard", async (req, res) => {
   try {
     const returnUser = await User.findOne({
       where: { username: req.body.username },
     });
-    req.session.save(() => {
-      req.session.loggedIn = true;
-      res.status(200).json(returnUser);
-    });
+    const getUsername = returnUser.get({ plain: true });
 
-    if (!returnUser) {
-      res.status(400).json({ message: "Wrong login inforomation" });
-      return;
-    }
-    const isPasswordValid = await returnUser.validatePassword(
-      req.body.password
-    );
-    console.log(isPasswordValid);
-    if (!isPasswordValid) {
-      res.status(400).json({ message: "You hit the password route" });
-      return;
-    }
-    console.log(returnUser);
-    // res.redirect("/dashboard");
-  } catch (err) {
-    res.status(400).json({ message: "This did not work" });
-  }
-});
-
-router.get("/dashboard", async (req, res) => {
-  try {
-    res.render("user_main");
+    res.render("user_main", {getUsername});
   } catch (err) {
     res.status(500).json(err);
   }
@@ -104,5 +51,10 @@ router.post("/post", async (req, res) => {
     res.status(400).json(err);
   }
 });
+
+
+
+
+
 
 module.exports = router;
