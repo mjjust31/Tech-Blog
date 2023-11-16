@@ -1,11 +1,13 @@
 const router = require("express").Router();
-const Post = require("../models/posts");
-const User = require("../models/user");
+
+const { Post, Comment, User } = require("../models");
 const bcrypt = require("bcrypt");
 
 router.get("/", async (req, res) => {
   try {
     const postData = await Post.findAll();
+    // {include: [User], }
+
     const post = postData.map((post) => post.get({ plain: true }));
 
     res.render("dashboard-posts", { post });
@@ -54,7 +56,7 @@ router.post("/user/login", async (req, res) => {
     });
     req.session.save(() => {
       req.session.loggedIn = true;
-      res.status(200).json(newUser);
+      res.status(200).json(returnUser);
     });
 
     if (!returnUser) {

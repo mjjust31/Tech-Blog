@@ -2,9 +2,9 @@
 // const sequelize = require("../config/connection");
 // const bcrypt = require("bcrypt");
 
-// class Comment extends Model {}
+// class Post extends Model {}
 
-// Comment.init(
+// Post.init(
 //   {
 //     id: {
 //       type: DataTypes.INTEGER,
@@ -12,36 +12,39 @@
 //       primaryKey: true,
 //       autoIncrement: true,
 //     },
+//     title: {
+//       type: DataTypes.STRING,
+//     },
 //     content: {
 //       type: DataTypes.STRING,
 //     },
 //   },
+
 //   {
 //     sequelize,
 //     timestamps: false,
 //     freezeTableName: true,
 //     underscored: true,
-//     modelName: "comment",
+//     modelName: "post",
 //   }
 // );
 
-// module.exports = Comment;
+// module.exports = Post;
+
 
 const { Sequelize, Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Comment extends Model {}
+class Post extends Model {}
 
-Comment.init(
+Post.init(
   {
-    content: {
-      type: DataTypes.STRING,
-      allowNull: false
-    }
+    title: DataTypes.STRING,
+    content: DataTypes.STRING
   },
   {
     sequelize
   }
 );
 
-module.exports = Comment;
+module.exports = Post;
