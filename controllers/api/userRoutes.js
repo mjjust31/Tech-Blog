@@ -17,9 +17,11 @@ router.post("/sign", async (req, res) => {
       password: req.body.password,
     });
     req.session.save(() => {
+      req.session.userid = newUser.id;
       req.session.loggedIn = true;
       res.status(200).json(newUser);
     });
+    console.log(newUser.id)
   } catch (err) {
     res.status(400).json(err);
   }
@@ -39,10 +41,6 @@ router.post("/login", async (req, res) => {
     const returnUser = await User.findOne({
       where: { username: req.body.username },
     });
-    req.session.save(() => {
-      req.session.loggedIn = true;
-      res.status(200).json(returnUser);
-    });
 
     if (!returnUser) {
       res.status(400).json({ message: "Wrong login information" });
@@ -56,6 +54,12 @@ router.post("/login", async (req, res) => {
       res.status(400).json({ message: "You hit the password route" });
       return;
     }
+    req.session.save(() => {
+      req.session.userid = returnUser.id;
+      req.session.loggedIn = true;
+      res.status(200).json(returnUser);
+    });
+
     console.log(returnUser);
   } catch (err) {
     res.status(400).json({ message: "This did not work" });

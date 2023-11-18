@@ -1,0 +1,15 @@
+<body>
+  <h1 class="welcomeUser"></h1>
+
+  {{#each post}}
+    <div class="container userDashboard-container">
+      <a class="card custom-userHomepage-card" href="/post/:{{id}}">
+        <h1>{{title}}</h1>
+        <p> Posted by: {{User.username}}</p>
+      </a>
+    </div>
+  {{/each}}
+
+  <a href="/post" class="newPost button">+ New Post</a>
+</body>
+<script src="/js/dashboard.js"></script>
