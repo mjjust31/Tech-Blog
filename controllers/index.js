@@ -21,28 +21,25 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/login", (req, res) => {
-  if (req.session.loggedIn) {
-    res.redirect("/");
-    return;
-  }
+// router.get("/login", (req, res) => {
+//   if (req.session.loggedIn) {
+//     res.redirect("/");
+//     return;
+//   }
+//   res.render("userLogin");
+// });
 
-  res.render("login");
-});
-
-router.get("/signup", (req, res) => {
-  if (req.session.loggedIn) {
-    res.redirect("/");
-    return;
-  }
-
-  res.render("signup");
-});
-
+// router.get("/signup", (req, res) => {
+//   if (req.session.loggedIn) {
+//     res.redirect("/");
+//     return;
+//   }
+//   res.render("userNew");
+// });
 
 router.get("/user/sign", async (req, res) => {
   try {
-    res.render("signup");
+    res.render("userNew");
   } catch (err) {
     res.status(500).json(err);
   }
@@ -70,7 +67,7 @@ router.post("/user/sign", async (req, res) => {
 
 router.get("/user/login", async (req, res) => {
   try {
-    res.render("login");
+    res.render("userLogin");
   } catch (err) {
     res.status(500).json(err);
   }
@@ -118,52 +115,53 @@ router.post("/user/logout", (req, res) => {
   }
 });
 
-
-router.get("/post",
-//  withAuth,
+router.get(
+  "/post",
+  //  withAuth,
   async (req, res) => {
-  try {
-    res.render("newPost");
-  } catch (err) {
-    res.status(500).json(err);
+    try {
+      res.render("newPost");
+    } catch (err) {
+      res.status(500).json(err);
+    }
   }
-});
+);
 
-router.post("/post",
-//  withAuth,
+router.post(
+  "/post",
+  //  withAuth,
   async (req, res) => {
-  console.log(req.body);
-  try {
-    const newPost = await Post.create({
-      title: req.body.title,
-      content: req.body.content,
-      userId: req.session.userId,
-    });
-    res.status(200).json(newPost);
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
-
-
-
-
-router.get("/dashboard", 
-// withAuth, 
-async (req, res) => {
-  try {
-    const postUserData = await Post.findAll({
-      where: {
+    console.log(req.body);
+    try {
+      const newPost = await Post.create({
+        title: req.body.title,
+        content: req.body.content,
         userId: req.session.userId,
-      },
-    });
-    const userPosts = postUserData.map((post) => post({ plain: true }));
-
-    res.render("user_dashboard", { layout: "login", userPosts });
-  } catch (err) {
-    res.status(500).json(err);
+      });
+      res.status(200).json(newPost);
+    } catch (err) {
+      res.status(400).json(err);
+    }
   }
-});
+);
 
+router.get(
+  "/dashboard",
+  // withAuth,
+  async (req, res) => {
+    try {
+      const postUserData = await Post.findAll({
+        where: {
+          userId: req.session.userId,
+        },
+      });
+      const userPosts = postUserData.map((post) => post({ plain: true }));
+
+      res.render("user_dashboard", { layout: "login", userPosts });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+);
 
 module.exports = router;

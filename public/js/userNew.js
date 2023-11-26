@@ -5,7 +5,7 @@ form.addEventListener("submit", async function (event) {
   const usernameEl = document.getElementById("newUsername");
   const passwordEl = document.getElementById("newPassword");
 
-  const response = await fetch("/api/user/sign", {
+  const response = await fetch("/user/sign", {
     method: "POST",
     body: JSON.stringify({
       username: usernameEl.value.trim(),
