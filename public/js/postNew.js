@@ -16,7 +16,7 @@ newPostFormEl.addEventListener("submit", async function (event) {
     headers: { "Content-Type": "application/json" },
   });
 
-  console.log("response", response);
+  // console.log("response", response);
 
   if (response.ok) {
     document.location.replace("/dashboard");

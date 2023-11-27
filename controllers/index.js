@@ -3,16 +3,16 @@ const { Post, Comment, User } = require("../models");
 const bcrypt = require("bcrypt");
 // const withAuth = require('../utils/auth')
 
-const apiRoutes = require("./api/");
-const homePage = require("./homePage.js");
-const withAuth = require("../utils/auth");
+// const apiRoutes = require("./api/");
+// const homePage = require("./homePage.js");
+// const withAuth = require("../utils/auth");
 
 // router.use("/api", apiRoutes);
 // router.use("/", homePage);
 
 router.get("/", async (req, res) => {
   try {
-    const postData = await Post.findAll({ include: [User] });
+    const postData = await Post.findAll({ include: User });
     const post = postData.map((post) => post.get({ plain: true }));
 
     res.render("dashboardAllPosts", { post });
@@ -81,11 +81,7 @@ router.post("/user/login", async (req, res) => {
       req.session.username = returnUser.username;
       req.session.loggedIn = true;
       res.json(returnUser);
-      // console.log(returnUser)
-      // res.status(200).json(returnUser);
     });
-    // console.log("returnid", returnUser.id);
-    // console.log("returnuser", returnUser.username);
   } catch (err) {
     res.status(400).json({ message: "This did not work" });
   }
@@ -96,24 +92,15 @@ router.get(
   // withAuth,
   async (req, res) => {
     try {
-      const postUserData = await Post.findAll(
-        {
-        where: {
-          userId: req.session.userId,
-        },
-      }
-      );
+      const postUserData = await Post.findAll({ include: User });
       const userPosts = postUserData.map((post) => post.get({ plain: true }));
 
-      res.render("dashboard-byUser", { layout: "dashboard", userPosts });
+      res.render("dashboard-byUser", { userPosts });
     } catch (err) {
       res.status(500).json(err);
     }
   }
 );
-
-
-
 
 router.get(
   "/post",
@@ -127,46 +114,20 @@ router.get(
   }
 );
 
-router.post(
-  "/post",
-  //  withAuth,
-  async (req, res) => {
-    console.log(req.body);
-    try {
-      const newPost = await Post.create({
-        title: req.body.title,
-        content: req.body.content,
-        userId: req.session.userId,
-      });
-      res.status(200).json(newPost);
-    } catch (err) {
-      res.status(400).json(err);
-    }
+router.post("/post", async (req, res) => {
+  // console.log(req.body);
+  try {
+    const newPost = await Post.create({
+      title: req.body.title,
+      content: req.body.content,
+      // userId: req.session.userId,
+    });
+    res.status(200).json(newPost);
+    console.log("create new post");
+  } catch (err) {
+    res.status(400).json(err);
   }
-);
-
-
-
-
-// router.get("/login", (req, res) => {
-//   if (req.session.loggedIn) {
-//     res.redirect("/");
-//     return;
-//   }
-//   res.render("userLogin");
-// });
-
-// router.get("/signup", (req, res) => {
-//   if (req.session.loggedIn) {
-//     res.redirect("/");
-//     return;
-//   }
-//   res.render("userNew");
-// });
-
-
-
-
+});
 
 router.post("/user/logout", (req, res) => {
   if (req.session.loggedIn) {
@@ -177,8 +138,5 @@ router.post("/user/logout", (req, res) => {
     res.status(404).end();
   }
 });
-
-
-
 
 module.exports = router;
