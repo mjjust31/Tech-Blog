@@ -1,33 +1,33 @@
-// const router = require("express").Router();
-// const { Post, Comment, User } = require("../models/");
+const router = require("express").Router();
+const { Post, Comment, User } = require("../models/");
 
-// router.get("/", async (req, res) => {
-//   try {
-//     const postData = await Post.findAll({ include: [User] });
-//     const post = postData.map((post) => post.get({ plain: true }));
+router.get("/", async (req, res) => {
+  try {
+    const postData = await Post.findAll({ include: User });
+    const post = postData.map((post) => post.get({ plain: true }));
 
-//     res.render("dashboard-posts", { post });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+    res.render("dashboardAllPosts", { post });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
-// router.get("/login", (req, res) => {
-//   if (req.session.loggedIn) {
-//     res.redirect("/");
-//     return;
-//   }
+router.get("/login", (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect("/");
+    return;
+  }
 
-//   res.render("login");
-// });
+  res.render("userLogin");
+});
 
-// router.get("/signup", (req, res) => {
-//   if (req.session.loggedIn) {
-//     res.redirect("/");
-//     return;
-//   }
+router.get("/sign", (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect("/");
+    return;
+  }
 
-//   res.render("signup");
-// });
+  res.render("userNew");
+});
 
-// module.exports = router;
+module.exports = router;
