@@ -7,7 +7,7 @@ formLogin.addEventListener("submit", async function (event) {
   console.log(usernameEl.value);
   console.log(passwordEl.value);
 
-  const response = await fetch("/user/login", {
+  const response = await fetch("/api/user/login", {
     method: "POST",
     body: JSON.stringify({
       username: usernameEl.value.trim(),

@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { User, Post, Comment } = require("../../models");
 
 router.get(
-  "/post",
+  "/",
   //  withAuth,
   async (req, res) => {
     try {
@@ -13,7 +13,7 @@ router.get(
   }
 );
 
-router.post("/post", async (req, res) => {
+router.post("/", async (req, res) => {
   // console.log(req.body);
   try {
     const newPost = await Post.create({

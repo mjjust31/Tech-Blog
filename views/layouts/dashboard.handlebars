@@ -40,25 +40,32 @@
               <li class="nav-item">
                 <a
                   class="nav-link active fs-1 text"
-                  href="/user/login"
+                  href="/login"
                 >Login</a>
               </li>
               {{#if loggedIn}}
                 <li class="nav-item">
                   <a
-                    class="nav-link active fs-1 text"
-                    href="/user/login"
+                    class=" logout nav-link active fs-1 text"
+                    href="/logout"
                   >Logout</a>
                 </li>
               {{/if}}
             </ul>
           </div>
         </div>
-        <h1 class="custom-title">The Tech Blog</h1>
+        <h1 class="custom-title"><My href="/dashboard">User's Dashboard</a></h1>
       </nav>
     </header>
 
+<main>
     {{{body}}}
+
+</main>
+
+<footer>
+  <a href="/dashboard/new" class="newPost button">+ New Post</a>
+</footer>
 
   </body>
   <script

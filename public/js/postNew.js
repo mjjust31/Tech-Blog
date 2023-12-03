@@ -7,7 +7,7 @@ newPostFormEl.addEventListener("submit", async function (event) {
   console.log(titleEl.value);
   console.log(contentEl.value);
 
-  const response = await fetch("/post", {
+  const response = await fetch("/api/post", {
     method: "POST",
     body: JSON.stringify({
       title: titleEl.value.trim(),
