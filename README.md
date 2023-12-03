@@ -1,3 +1,7 @@
+# Tech Blog
+
+## Screenshot
+
 
 
 
@@ -62,3 +66,6 @@ THEN I am able to view posts and comments but I am prompted to log in again befo
 
 References: 
 1. Neon Button - https://freefrontend.com/css-buttons/page/2 by mrshaikh456
+2. NU XE Learning assistance
+3. NU curriculum also incorporated the use of controllers for extra practice
+
