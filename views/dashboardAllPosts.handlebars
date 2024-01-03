@@ -5,7 +5,7 @@
     <div class="container userDashboard-container">
       <a class="card custom-userHomepage-card" href="/post/:{{id}}">
         <h1>{{title}}</h1>
-        <p> Posted by: {{User.username}}</p>
+        <p> Posted by: {{User.username}} date: {{format_date createdAt}}</p>
       </a>
     </div>
   {{/each}}
